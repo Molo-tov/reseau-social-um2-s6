@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Lun 01 Avril 2013 à 03:33
+-- Généré le: Lun 01 Avril 2013 à 19:43
 -- Version du serveur: 5.5.29-0ubuntu1
 -- Version de PHP: 5.4.9-4ubuntu2
 
@@ -233,24 +233,24 @@ CREATE TABLE IF NOT EXISTS `Tchat` (
 
 CREATE TABLE IF NOT EXISTS `Utilisateur` (
   `idUtilisateur` int(11) NOT NULL AUTO_INCREMENT,
-  `login` varchar(255) NOT NULL,
   `password` varchar(255) NOT NULL,
   `email` varchar(255) NOT NULL,
   `nom` varchar(255) NOT NULL,
   `prenom` varchar(255) NOT NULL,
   `dateNaissance` date NOT NULL,
   `optionDroit` int(11) NOT NULL DEFAULT '0',
+  `sexe` int(11) NOT NULL COMMENT '0 pour garçon, 1 pour fille',
   PRIMARY KEY (`idUtilisateur`),
-  UNIQUE KEY `login` (`login`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='Liste des utilisateurs avec leurs informations personnelles' AUTO_INCREMENT=2 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='Liste des utilisateurs avec leurs informations personnelles' AUTO_INCREMENT=6 ;
 
 --
 -- Contenu de la table `Utilisateur`
 --
 
-INSERT INTO `Utilisateur` (`idUtilisateur`, `login`, `password`, `email`, `nom`, `prenom`, `dateNaissance`, `optionDroit`) VALUES
-(1, 'client', 'client', 'client@client.com', 'Nclient', 'Pclient', '2013-04-17', 0);
+INSERT INTO `Utilisateur` (`idUtilisateur`, `password`, `email`, `nom`, `prenom`, `dateNaissance`, `optionDroit`, `sexe`) VALUES
+(1, 'client', 'client@client.com', 'Nclient', 'Pclient', '2013-04-17', 0, 0),
+(5, 'Baltosss1989', 'fredverdier30@hotmail.fr', 'Verdier', 'Fred', '1989-07-13', 0, 0);
 
 -- --------------------------------------------------------
 

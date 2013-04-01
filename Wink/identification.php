@@ -1,31 +1,46 @@
 <?php
 	//ini_set('display_errors', 'On');   //Affiche les messages d'erreurs et warning
-	include 'utilisateur.php';	//Inclusion de la classe Utilisateur
-	if($_POST['connexion'])		//Si l'utilisateur a appuyé sur Connexion du formulaire de connexion
+	include_once 'utilisateur.php';	//Inclusion de la classe Utilisateur
+	session_start();
+	$connectReussie=false;
+	if(isset($_POST['connexion']))		//Si l'utilisateur a appuyé sur Connexion du formulaire de connexion
 	{
 		$utilisateur = new Utilisateur($_POST['pass'], $_POST['id']);	//Création d'un utilisateur avec identification dans la base de données
-		if($utilisateur->mysql_id == -1)	//Cas ou la connexion est impossible
+		if($utilisateur->idUtilisateur != -1)	
 		{
-			echo 'Connexion avec la base de donnees impossible';
-		}
-		else if($utilisateur->idUtilisateur <0)	//Cas ou l'authentification de l'utilisateur est erronée
-		{
-			echo "Erreur de mot de passe ou d'adresse mail";
-		}
-		else	//Si le client est authentifié
-		{
-			session_start();
 			$_SESSION['utilisateur']=$utilisateur;
-			include 'home.php';	//On ne passe pas sur home.php, on reste sur cette page mais on récupère les informations... A revoir....
+			$connectReussie=true;
+			include 'home.php';
+		}
+		else if($utilisateur->idUtilisateur == -1)
+		{
+			echo "Erreur d'email ou de mot de passe";
+		}
+		else if($utilisateur->nom ==-1)	
+		{
+			echo "Récupération des informations de l'utilisateur échouée";
+		}
+		else	
+		{
+			echo "Connexion à la base de données impossible";
 		}
 	}
 	else if(isset($_POST['champs_prenom']) && !empty($_POST['champs_prenom']) && !empty($_POST['champs_nom']) && !empty($_POST['champs_mail']) )//On regarde si les variables $_POST['pseudo'] et $_GET['formulaire'] existent, sinon la condition ne sera pas validée
      	{ 
-	     	session_start(); //on ouvre une session
-	    	$_SESSION['champs_prenom'] = $_POST['champs_prenom'];
-		header("location:home.php");
-     	} 
-	else
+		$_POST['jour']=13;
+		$_POST['mois']=7;
+		$_POST['annee']=1989;
+		include_once 'inscription.php';
+		if(inscription()==1)
+		{
+			echo 'Inscription effectuée';
+		}
+		else
+		{
+			echo "Erreur lors de l'inscription, email déjà existant";
+		}
+	} 
+	if(!$connectReussie)
 	{
 ?>
 <!DOCTYPE html>
@@ -45,7 +60,7 @@
         	</div>
         	
         	<div id="contenu">	
-        		<form id="login_form" action="identification.php" method="post">
+        		<form id="login_form" action="index.php" method="post">
         			<br>
               
         			<input class="id" type="text" name="id" value="Adresse email"><br>
@@ -53,7 +68,7 @@
         			<input class="connexion" type="submit" name="connexion" value="Connexion">
        			</form>
 
-       			<form id="inscription_form" action="#" method="post">   
+       			<form id="inscription_form" action="index.php" method="post">   
        			<h3 id="text_inscription"><strong>Nouveau ? Inscrivez-vous</strong></h3>
       
        				<input class="champs_prenom" type="text" name="champs_prenom" placeholder="Prénom"><br>
