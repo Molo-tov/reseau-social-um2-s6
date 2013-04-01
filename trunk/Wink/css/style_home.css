@@ -1,0 +1,244 @@
+#texte_connecte{
+	color: #DCDCDC;
+	margin-left: 70px;
+	font-family: Georgia;
+	font-size: 18px;
+}
+
+
+
+#barre_gauche{
+	width: 200px;
+	min-height: 800px;
+	background-color:#75A29D;
+	border: 3px #75A29D solid;
+	border-radius: 5px;
+	margin-left: 20px;
+	margin-top: 20px;
+	
+}
+
+#cadre_photo{
+	border: 5px black solid;
+	border-radius: 5px;
+	position: absolute;
+	margin-left: 3px;
+	width: 185px;
+	height: 185px;
+}
+
+#photo{
+	position: absolute;
+	margin-left: 8px;
+	margin-top: 5px;
+	width: 175px;
+	height: 175px;
+}
+
+
+.recherche{
+	margin-top: 200px;
+	margin-left: 4px;
+	border: 1px black solid;
+	width: 190px;
+	height: 25px;
+
+
+}
+
+.champs_recherche{
+
+	width: 170px;
+	height: 23px;
+	border: 0;
+	float: left;
+}
+
+.bouton_recherche{
+	border: 0;
+	width: 18px;
+	height: 24px;
+	background: url("../img/lo.jpg");
+	cursor: pointer;
+	
+}
+
+.menu{
+	list-style: none;
+	width: 200px;
+	font-size: 15px;
+	font-family: Georgia;
+	margin-top: 20px;
+	}
+
+.ascenseur{
+	cursor: pointer;
+	display: block;
+	border-bottom: 1px solid rgba(0,0,0,0.2);
+	border-top: 1px solid rgba(255,255,255,0.2);
+	background-image: url('../img/bg.jpg');
+	text-decoration: none;
+	color: #FFF;
+	text-shadow: 1px 0px 1px rgba(0,0,0,0.2);
+	filter: dropshadow(color=#000, offx=1, offy=0);
+	padding: 5px;
+	padding-left: 20px;
+
+}
+
+.ascenseur:hover{
+	background: #93A9A6;
+}
+
+
+
+.menu div li a {
+	margin-left: 30px;
+	list-style: none;
+	font-size: 15px;
+	color: black;
+	text-shadow: 1px 0px 1px rgba(255,255,255,0.5);
+	filter: dropshadow(color=#000, offx=1, offy=0);
+	text-decoration: none;
+}	
+
+.menu div li a:hover{
+	color: #c1c1c1;
+	overflow: auto;
+}
+
+
+
+#mur{
+	position:absolute;
+	width: auto;
+	right: 50px;
+	left: 250px;
+	top: 20px;
+	min-height: 500px;
+	background-color:#75A29D;
+	border: 0px #75A29D solid;
+	border-radius: 5px;
+	
+	
+}
+
+.bulle_statut{
+	position: relative;
+}
+
+.text_bulle{
+
+	width: 800px;
+	height: 50px;
+	margin-right: 20px;
+	margin-left: 20px;
+	margin-top: 10px;
+	border: 1px black solid;
+	border-radius: 5px;
+}
+.publier{
+margin-left: 700px;
+width: 100px;
+}
+
+@font-face{
+	font-family: "Entypo";
+	src: url('fonts/entypo.eot');
+	src: url('fonts/entypo.eot?#iefix') format('emdedded-opentype')
+		 url('fonts/entypo.woff') format('woff'),
+		 url('fonts/entypo.ttf') format('truetype'),
+		 url('fonts/entypo.svg#EntypoRegular') format('svg');
+		 font-weight: normal;
+		 font-style: normal;
+}
+
+.icon{
+	font-family: "Entypo";
+	font-size: 30px;
+	line-height: 0px;
+	margin-top: 10px;
+	text-align: center;
+	
+}
+
+.notifications{
+	position: absolute;
+	top:15px;left: 900px;
+	font: normal 12px Helvetica, Arial, sans-serif;
+	color: white;
+	box-shadow: (0px 4px 30px white;
+
+}
+
+	.notification{
+		position: relative;
+		cursor: pointer;
+		border-bottom: 1px solid #c1c1c1;
+		box-shadow: (0px 0px 0px transparent);
+	}
+
+	h2{
+		font-size: 14px;
+		font-weight: bold;
+		margin: 0px;
+		padding: 0;
+		padding-top: 10px 0;
+	}
+
+	p{margin: 0px; padding: 0px; padding-bottom: 10px;}
+
+	.left{
+		position: absolute;
+		height: 50px;
+		width: 30px;
+		top: 5px;
+		left:0;
+		border-right: 1px solid white;
+		padding: 0 10px;
+
+	}
+
+	.right{
+		margin-left: 70px;
+	}
+
+.notifications2{
+	position: fixed;
+	top:190px;
+	left: 1125px;
+	border: 1px solid #516562;
+	opacity: 0.5;
+}
+
+
+.icone_messages{
+	font-family: "Entypo";
+	color: red;
+	font-size: 30px;
+	cursor: pointer;
+}
+
+.icone_reglages{
+	font-family: "Entypo";
+	color: red;
+	font-size: 30px;
+	cursor: pointer;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	

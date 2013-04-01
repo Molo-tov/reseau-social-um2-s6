@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Sam 30 Mars 2013 à 15:59
+-- Généré le: Lun 01 Avril 2013 à 03:33
 -- Version du serveur: 5.5.29-0ubuntu1
 -- Version de PHP: 5.4.9-4ubuntu2
 
@@ -243,7 +243,14 @@ CREATE TABLE IF NOT EXISTS `Utilisateur` (
   PRIMARY KEY (`idUtilisateur`),
   UNIQUE KEY `login` (`login`),
   UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Liste des utilisateurs avec leurs informations personnelles' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='Liste des utilisateurs avec leurs informations personnelles' AUTO_INCREMENT=2 ;
+
+--
+-- Contenu de la table `Utilisateur`
+--
+
+INSERT INTO `Utilisateur` (`idUtilisateur`, `login`, `password`, `email`, `nom`, `prenom`, `dateNaissance`, `optionDroit`) VALUES
+(1, 'client', 'client', 'client@client.com', 'Nclient', 'Pclient', '2013-04-17', 0);
 
 -- --------------------------------------------------------
 
@@ -274,8 +281,8 @@ ALTER TABLE `AlbumPhoto`
 -- Contraintes pour la table `AssocPhoto`
 --
 ALTER TABLE `AssocPhoto`
-  ADD CONSTRAINT `AssocPhoto_ibfk_2` FOREIGN KEY (`idPhoto`) REFERENCES `Photo` (`idPhoto`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `AssocPhoto_ibfk_1` FOREIGN KEY (`idAlbum`) REFERENCES `AlbumPhoto` (`idAlbum`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `AssocPhoto_ibfk_1` FOREIGN KEY (`idAlbum`) REFERENCES `AlbumPhoto` (`idAlbum`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `AssocPhoto_ibfk_2` FOREIGN KEY (`idPhoto`) REFERENCES `Photo` (`idPhoto`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `CategorieAmis`
@@ -287,8 +294,8 @@ ALTER TABLE `CategorieAmis`
 -- Contraintes pour la table `Commentaire`
 --
 ALTER TABLE `Commentaire`
-  ADD CONSTRAINT `Commentaire_ibfk_2` FOREIGN KEY (`idPublication`) REFERENCES `Publication` (`idPublication`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `Commentaire_ibfk_1` FOREIGN KEY (`idNotification`) REFERENCES `Notification` (`idNotification`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `Commentaire_ibfk_1` FOREIGN KEY (`idNotification`) REFERENCES `Notification` (`idNotification`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Commentaire_ibfk_2` FOREIGN KEY (`idPublication`) REFERENCES `Publication` (`idPublication`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `Evennement`
@@ -306,15 +313,15 @@ ALTER TABLE `GroupeOpinion`
 -- Contraintes pour la table `Like`
 --
 ALTER TABLE `Like`
-  ADD CONSTRAINT `Like_ibfk_2` FOREIGN KEY (`idNotification`) REFERENCES `Notification` (`idNotification`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `Like_ibfk_1` FOREIGN KEY (`idUtilisateur`) REFERENCES `Utilisateur` (`idUtilisateur`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `Like_ibfk_1` FOREIGN KEY (`idUtilisateur`) REFERENCES `Utilisateur` (`idUtilisateur`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Like_ibfk_2` FOREIGN KEY (`idNotification`) REFERENCES `Notification` (`idNotification`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `Message`
 --
 ALTER TABLE `Message`
-  ADD CONSTRAINT `Message_ibfk_2` FOREIGN KEY (`idDestinataire`) REFERENCES `Utilisateur` (`idUtilisateur`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `Message_ibfk_1` FOREIGN KEY (`idNotification`) REFERENCES `Notification` (`idNotification`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `Message_ibfk_1` FOREIGN KEY (`idNotification`) REFERENCES `Notification` (`idNotification`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Message_ibfk_2` FOREIGN KEY (`idDestinataire`) REFERENCES `Utilisateur` (`idUtilisateur`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `Notification`
@@ -339,23 +346,23 @@ ALTER TABLE `Publication`
 -- Contraintes pour la table `RelationAmitie`
 --
 ALTER TABLE `RelationAmitie`
-  ADD CONSTRAINT `RelationAmitie_ibfk_3` FOREIGN KEY (`idCategorie`) REFERENCES `CategorieAmis` (`idCategorie`) ON DELETE SET NULL ON UPDATE SET NULL,
   ADD CONSTRAINT `RelationAmitie_ibfk_1` FOREIGN KEY (`idUtilisateur`) REFERENCES `RelationAmitie` (`idCategorie`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `RelationAmitie_ibfk_2` FOREIGN KEY (`idAmi`) REFERENCES `Utilisateur` (`idUtilisateur`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `RelationAmitie_ibfk_2` FOREIGN KEY (`idAmi`) REFERENCES `Utilisateur` (`idUtilisateur`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `RelationAmitie_ibfk_3` FOREIGN KEY (`idCategorie`) REFERENCES `CategorieAmis` (`idCategorie`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
 -- Contraintes pour la table `Tchat`
 --
 ALTER TABLE `Tchat`
-  ADD CONSTRAINT `Tchat_ibfk_2` FOREIGN KEY (`idDestinataire`) REFERENCES `Utilisateur` (`idUtilisateur`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `Tchat_ibfk_1` FOREIGN KEY (`idExpediteur`) REFERENCES `Utilisateur` (`idUtilisateur`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `Tchat_ibfk_1` FOREIGN KEY (`idExpediteur`) REFERENCES `Utilisateur` (`idUtilisateur`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Tchat_ibfk_2` FOREIGN KEY (`idDestinataire`) REFERENCES `Utilisateur` (`idUtilisateur`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Contraintes pour la table `Wink`
 --
 ALTER TABLE `Wink`
-  ADD CONSTRAINT `Wink_ibfk_2` FOREIGN KEY (`idDestinataire`) REFERENCES `Utilisateur` (`idUtilisateur`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `Wink_ibfk_1` FOREIGN KEY (`idNotification`) REFERENCES `Notification` (`idNotification`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `Wink_ibfk_1` FOREIGN KEY (`idNotification`) REFERENCES `Notification` (`idNotification`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `Wink_ibfk_2` FOREIGN KEY (`idDestinataire`) REFERENCES `Utilisateur` (`idUtilisateur`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;

@@ -1,0 +1,126 @@
+
+#login_form{
+	background-color: #93A9A6;
+	border: 3px #40A497 solid;
+	border-radius: 10px;
+	border-color: black;
+	box-shadow: 6px 6px 6px black;
+	width: 300px;
+	height: 90px;
+	margin-left: 700px;
+	margin-top: 60px;
+	}
+
+INPUT.id {
+	margin-left: 5px;
+   width: 280px; 
+   height: 20px;
+   font-size:12px;
+   border: 1px black solid;
+   border-radius: 5px;
+   box-shadow: 2px 2px 2px black;
+	}
+
+INPUT.pass {
+	margin-left: 5px;
+	margin-top: 5px;
+   width: 200px; 
+   height: 20px;
+   font-size:12px; 
+   border: 1px black solid;
+   border-radius: 5px;
+   box-shadow: 2px 2px 2px black;
+	}
+
+INPUT.connexion {
+   width: 80px; 
+   font-size:15px;
+   cursor: pointer;
+	}
+
+
+#inscription_form {
+	background-color: #93A9A6;
+	border: 3px #40A497 solid;
+	border-radius: 10px;
+	border-color: black;
+	box-shadow: 6px 6px 6px black;
+	width: 300px;
+	height: 250px;
+	margin-left: 700px;
+	margin-top: 30px;
+	}
+INPUT.champs_prenom {
+	margin-left: 5px;
+	width: 280px; 
+   height: 20px;
+   font-size:12px;
+   border: 1px black solid;
+   border-radius: 5px;
+	}
+INPUT.champs_nom {
+	margin-left: 5px;
+	margin-top: 5px;
+	width: 280px; 
+   height: 20px;
+   font-size:12px;
+   border: 1px black solid;
+   border-radius: 5px;
+	}
+INPUT.champs_mail {
+	margin-left: 5px;
+	margin-top: 5px;
+	width: 280px; 
+   height: 20px;
+   font-size:12px;
+   border: 1px black solid;
+   border-radius: 5px;
+	}
+INPUT.champs_password{
+	margin-left: 5px;
+	margin-top: 5px;
+	width: 280px; 
+   height: 20px;
+   font-size:12px;
+   border: 1px black solid;
+   border-radius: 5px;
+	}
+
+
+INPUT.radio_h{
+	margin-left: 10px;
+}
+
+INPUT.champs_anniversaire{
+	margin-left: 5px;
+	border: 1px black solid;
+  	border-radius: 5px;
+	}
+
+
+INPUT.champs_inscription{
+	width: 200px; 
+   margin-left: 50px;
+   margin-top: 5px;
+   cursor: pointer;
+	}
+
+#text_inscription{
+	margin-left: 10px;
+	font-family: Georgia;
+	font-size: 20px;
+	}
+
+#text_H{font-family: Georgia;}
+#text_F{font-family: Georgia;}
+
+#text_Anniversaire{
+	font-family: Georgia;
+ 	margin-left: 10px;
+}
+
+
+
+
+
+

@@ -1,0 +1,38 @@
+body {
+	background-color:#75A29D;
+	min-width: 800px;
+}
+
+#haut_page{
+	-moz-border-radius : 10px;
+	background-image: url("../img/bg.jpg");
+	width: auto;
+	height: auto ;
+	border: 3px #40A497 solid;
+	border-radius: 10px;
+	border-color: black;
+	box-shadow: 6px 6px 6px black;
+	margin-top: 1%;
+}
+
+#titre{
+	font-family: Georgia;
+	font-size: 40px;
+	color: #75A29D;
+	margin-left: 50px;
+}
+
+#contenu{
+	position: relative;
+	-moz-border-radius : 10px;
+	background-image: url("../img/bg.jpg");
+	/*background-color: #93A9A6;*/
+	width: auto;
+	min-height: 800px;
+	border: 3px #40A497 solid;
+	border-radius: 10px;
+	border-color: black;
+	box-shadow: 6px 6px 6px black;
+	margin-top: 30px;
+
+	}

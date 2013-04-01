@@ -1,0 +1,57 @@
+
+.menu{
+	list-style: none;
+	padding: 0;
+	width: 200px;
+	font-size: 15px;
+	font-family: Georgia;
+	background-color: #c1c1c1;
+	border: 1px solid rgba(0,0,0,0.7);
+}
+
+
+.menu li a{
+	display: block;
+	border-bottom: 1px solid rgba(0,0,0,0.2);
+	border-top: 1px solid rgba(255,255,255,0.2);
+	background-image: url('fd.jpg');
+	text-decoration: none;
+	color: #FFF;
+	text-shadow: 1px 0px 1px rgba(0,0,0,0.2);
+	filter: dropshadow(color=#000, offx=1, offy=0);
+	padding: 5px;
+	padding-left: 20px;
+}
+
+.menu li ul li a{
+	font-size: 14px;
+	color: #2E3D3B;
+	text-shadow: 1px 0px 1px rgba(255,255,255,0.5);
+	filter: dropshadow(color=#000, offx=1, offy=0);
+
+}
+
+.menu li a:hover{
+	background: #93A9A6;
+}
+
+.menu ul{ /* */
+	margin: 0;
+	padding: 0;
+	list-style: none;
+	height: 0;
+	overflow: hidden;
+}
+
+.menu li:hover ul{
+	min-height: 150px;
+	overflow: auto;
+}
+
+.menu ul li a{
+	background: #d2d2d2;
+}
+
+.menu ul li a:hover{
+	background: #c1c1c1;
+}
