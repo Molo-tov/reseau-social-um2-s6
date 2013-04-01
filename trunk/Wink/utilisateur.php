@@ -23,10 +23,12 @@
 		{
 			$this->password=$pw;
 			$this->email=$mail;
+			$this->mysql_id=-1;
+			$this->idUtilisateur = -1;
 			$this->connexion();
 			if($this->mysql_id!=-1)
 			{
-				$this->idUtilisateur=$this->identification();
+				$this->identification();
 				if($this->idUtilisateur>=0)
 				{	
 					$this->getInfo();
@@ -37,21 +39,13 @@
 		public function connexion()
 		{
 			$this->mysql_id = mysql_connect('localhost', 'client', 'client')or die('Connexion impossible');
-			if($this->mysql_id)
-			{
-				mysql_select_db('Winky', $this->mysql_id)or die('Selection de la base de données impossible');
-			}
+			mysql_select_db('Winky', $this->mysql_id)or die('Selection de la base de données impossible');
 		}
 		public function identification()
 		{
 			$ident = mysql_query("SELECT idUtilisateur, password FROM Utilisateur WHERE email='".$this->email."'", $this->mysql_id) or die('Requete impossible');
-			if(mysql_num_rows($ident) == 0)
+			if(mysql_num_rows($ident) >0)
 			{
-				$this->idUtilisateur=-2;
-			}
-			else
-			{	
-				$this->idUtilisateur = -1;
 				while (($result = mysql_fetch_assoc($ident))&&($this->idUtilisateur==-1)) 
 				{
 					if($result["password"] == $this->password)
@@ -66,7 +60,6 @@
 			$info = mysql_query("SELECT nom, prenom, dateNaissance, optionDroit FROM Utilisateur WHERE email='".$this->email."'", $this->mysql_id)or die('Requete getInfo impossible');
 			if(mysql_num_rows($info)==0)
 			{
-				echo "</br>pas d'information</br>";
 				mysql_close($this->mysql_id);
 				$this->nom=-1;
 			}
