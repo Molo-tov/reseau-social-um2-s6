@@ -1,5 +1,6 @@
 <?php
-	//ini_set('display_errors', 'On');   //Affiche les messages d'erreurs et warning
+	ini_set('display_errors', 'On');   //Affiche les messages d'erreurs et warning
+	error_reporting(E_ALL);
 	include_once 'utilisateur.php';	//Inclusion de la classe Utilisateur
 	session_start();
 	$connectReussie=false;
@@ -12,6 +13,7 @@
 			$connectReussie=true;
 			include 'home.php';
 		}
+		//Cas d'erreurs, à afficher de meilleurs façon...
 		else if($utilisateur->idUtilisateur == -1)
 		{
 			echo "Erreur d'email ou de mot de passe";
@@ -25,13 +27,20 @@
 			echo "Connexion à la base de données impossible";
 		}
 	}
+	else if(isset($_GET['email'])&&isset($_GET['code']))
+	{
+		include_once 'inscription.php';
+		$valide = validerInscription();
+		//Si $valide == 0 alors l'inscription est faite, sinon voir les codes d'erreurs.
+	}
 	else if(isset($_POST['champs_prenom']) && !empty($_POST['champs_prenom']) && !empty($_POST['champs_nom']) && !empty($_POST['champs_mail']) )//On regarde si les variables $_POST['pseudo'] et $_GET['formulaire'] existent, sinon la condition ne sera pas validée
      	{ 
 		$_POST['jour']=13;
 		$_POST['mois']=7;
 		$_POST['annee']=1989;
 		include_once 'inscription.php';
-		if(inscription()==1)
+		//inscription() == 0 alors le mail de confirmation est envoyé, sinon voir codes d'erreurs.
+		if(inscription()==0)
 		{
 			echo 'Inscription effectuée';
 		}

@@ -1,4 +1,5 @@
 <?php
+	include_once "ObjPdo.php";
 	class Utilisateur
 	{
 		private $password;
@@ -8,6 +9,7 @@
 		private $prenom;
 		private $dateNaissance;
 		private $email;
+		private $idPhoto;
 		public function __get($attribut)
 		{
 			if($attribut=='password'){return $this->password;}
@@ -25,53 +27,42 @@
 			$this->email=$mail;
 			$this->mysql_id=-1;
 			$this->idUtilisateur = -1;
-			$this->connexion();
-			if($this->mysql_id!=-1)
-			{
-				$this->identification();
-				if($this->idUtilisateur>=0)
-				{	
-					$this->getInfo();
-				}
+			$ident = $this->identification();
+			if($this->idUtilisateur>=0)
+			{	
+				$this->setInfo();
 			}
-			mysql_close($this->mysql_id);
-		}
-		public function connexion()
-		{
-			$this->mysql_id = mysql_connect('localhost', 'client', 'client')or die('Connexion impossible');
-			mysql_select_db('Winky', $this->mysql_id)or die('Selection de la base de données impossible');
 		}
 		public function identification()
 		{
-			$ident = mysql_query("SELECT idUtilisateur, password FROM Utilisateur WHERE email='".$this->email."'", $this->mysql_id) or die('Requete impossible');
-			if(mysql_num_rows($ident) >0)
+			$pdo = ObjPdo::getPdo();
+			$ident = $pdo->query("SELECT idUtilisateur, password FROM Utilisateur WHERE email='".$this->email."'")or exit(3);
+			$result = $ident->fetchAll();
+			if(count($result)>0)
 			{
-				while (($result = mysql_fetch_assoc($ident))&&($this->idUtilisateur==-1)) 
+				if($result[0]["password"] == $this->password)
 				{
-					if($result["password"] == $this->password)
-					{
-						$this->idUtilisateur = $result['idUtilisateur'];
-					}
+					$this->idUtilisateur = $result[0]['idUtilisateur'];
 				}
 			}
 		}
-		public function getInfo()
+		public function setInfo()
 		{
-			$info = mysql_query("SELECT nom, prenom, dateNaissance, optionDroit FROM Utilisateur WHERE email='".$this->email."'", $this->mysql_id)or die('Requete getInfo impossible');
-			if(mysql_num_rows($info)==0)
+			$pdo = ObjPdo::getPdo();
+			$info = $pdo->query("SELECT nom, prenom, dateNaissance, optionDroit, idPhoto FROM Utilisateur WHERE email='".$this->email."'")or exit(3);
+			$assocInfo = $info->fetchAll();
+			if(count($assocInfo)==0)
 			{
-				mysql_close($this->mysql_id);
 				$this->nom=-1;
 			}
 			else
 			{
-				$infot=mysql_fetch_assoc($info);
-				$this->nom=$infot['nom'];
-				$this->prenom=$infot['prenom'];
-				$this->optionDroit=$infot['optionDroit'];
-				$this->dateNaissance=$infot['dateNaissance'];
+				$this->nom=$assocInfo[0]['nom'];
+				$this->prenom=$assocInfo[0]['prenom'];
+				$this->optionDroit=$assocInfo[0]['optionDroit'];
+				$this->dateNaissance=$assocInfo[0]['dateNaissance'];
+				$this->idPhoto=$assocInfo[0]['idPhoto'];
 			}
-			mysql_close($this->mysql_id);
 		}
 	}		
 ?>
