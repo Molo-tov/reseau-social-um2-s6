@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Client: localhost
--- Généré le: Lun 01 Avril 2013 à 19:43
+-- Généré le: Lun 08 Avril 2013 à 16:14
 -- Version du serveur: 5.5.29-0ubuntu1
 -- Version de PHP: 5.4.9-4ubuntu2
 
@@ -116,6 +116,25 @@ CREATE TABLE IF NOT EXISTS `GroupeOpinion` (
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `InscriptionEnAttente`
+--
+
+CREATE TABLE IF NOT EXISTS `InscriptionEnAttente` (
+  `idInscription` int(11) NOT NULL AUTO_INCREMENT,
+  `email` varchar(255) NOT NULL,
+  `password` varchar(255) NOT NULL,
+  `nom` varchar(255) NOT NULL,
+  `prenom` varchar(255) NOT NULL,
+  `dateNaissance` date NOT NULL,
+  `sexe` int(11) NOT NULL,
+  `code` varchar(255) NOT NULL,
+  PRIMARY KEY (`idInscription`),
+  UNIQUE KEY `email` (`email`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Liste des inscriptions en attente de confirmation' AUTO_INCREMENT=1 ;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `Like`
 --
 
@@ -172,7 +191,14 @@ CREATE TABLE IF NOT EXISTS `Photo` (
   `idPublication` int(11) DEFAULT NULL,
   PRIMARY KEY (`idPhoto`),
   KEY `idPublication` (`idPublication`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Liste des photos ayant pour adresse image' AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='Liste des photos ayant pour adresse image' AUTO_INCREMENT=2 ;
+
+--
+-- Contenu de la table `Photo`
+--
+
+INSERT INTO `Photo` (`idPhoto`, `image`, `titre`, `idPublication`) VALUES
+(1, 'img01.jpg', 'Moi', NULL);
 
 -- --------------------------------------------------------
 
@@ -240,17 +266,20 @@ CREATE TABLE IF NOT EXISTS `Utilisateur` (
   `dateNaissance` date NOT NULL,
   `optionDroit` int(11) NOT NULL DEFAULT '0',
   `sexe` int(11) NOT NULL COMMENT '0 pour garçon, 1 pour fille',
+  `idPhoto` int(11) DEFAULT NULL,
   PRIMARY KEY (`idUtilisateur`),
-  UNIQUE KEY `email` (`email`)
-) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='Liste des utilisateurs avec leurs informations personnelles' AUTO_INCREMENT=6 ;
+  UNIQUE KEY `email` (`email`),
+  KEY `idPhoto` (`idPhoto`)
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 COMMENT='Liste des utilisateurs avec leurs informations personnelles' AUTO_INCREMENT=7 ;
 
 --
 -- Contenu de la table `Utilisateur`
 --
 
-INSERT INTO `Utilisateur` (`idUtilisateur`, `password`, `email`, `nom`, `prenom`, `dateNaissance`, `optionDroit`, `sexe`) VALUES
-(1, 'client', 'client@client.com', 'Nclient', 'Pclient', '2013-04-17', 0, 0),
-(5, 'Baltosss1989', 'fredverdier30@hotmail.fr', 'Verdier', 'Fred', '1989-07-13', 0, 0);
+INSERT INTO `Utilisateur` (`idUtilisateur`, `password`, `email`, `nom`, `prenom`, `dateNaissance`, `optionDroit`, `sexe`, `idPhoto`) VALUES
+(1, 'client', 'client@client.com', 'Nclient', 'Pclient', '2013-04-17', 0, 0, 1),
+(5, 'Baltosss1989', 'fredverdier30@hotmail.fr', 'Verdier', 'Fred', '1989-07-13', 0, 0, NULL),
+(6, 'moa', 'toto@gmail.com', 'Ferrero', 'quety', '1989-07-13', 0, 1, NULL);
 
 -- --------------------------------------------------------
 
@@ -356,6 +385,12 @@ ALTER TABLE `RelationAmitie`
 ALTER TABLE `Tchat`
   ADD CONSTRAINT `Tchat_ibfk_1` FOREIGN KEY (`idExpediteur`) REFERENCES `Utilisateur` (`idUtilisateur`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `Tchat_ibfk_2` FOREIGN KEY (`idDestinataire`) REFERENCES `Utilisateur` (`idUtilisateur`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Contraintes pour la table `Utilisateur`
+--
+ALTER TABLE `Utilisateur`
+  ADD CONSTRAINT `Utilisateur_ibfk_1` FOREIGN KEY (`idPhoto`) REFERENCES `Photo` (`idPhoto`) ON DELETE SET NULL ON UPDATE SET NULL;
 
 --
 -- Contraintes pour la table `Wink`

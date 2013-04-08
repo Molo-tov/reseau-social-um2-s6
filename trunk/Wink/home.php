@@ -1,7 +1,7 @@
 <?php
-	ini_set('display_errors', 'On');
-	error_reporting(E_ALL);
+	//ini_set('display_errors', 'On');
 	//on veut afficher le nom de la personne connecté
+	include_once "recuperation.php";
 ?>
 
 <!DOCTYPE html>
@@ -13,52 +13,62 @@
             <script type="text/javascript" src="js/jquery-1.9.1.min.js"></script>
             <script type="text/javascript" src="js/fonction.js"></script>
             <script type="text/javascript" src="js/jquery.notif.js"></script>
+            <script type="text/javascript" src="js/apparition_info.js"></script>
         </head>
 
-        <body>
-        	
+         <body>
+            
             <div id="haut_page">
-        		<h1 id="titre"> Wink ;)</h1>
-                <div id="texte_connecte">
-                    <p>Vous êtes connecté : <?php echo $_SESSION['utilisateur']->prenom.' '.$_SESSION['utilisateur']->nom; ?></p>
-                 </div>
+                <h1 id="titre"> Winky</h1>
 
-                 <div class="notifications">
-                     <div class="notification">
-                         <div class="left">
-                             <div class="icon">
-                                &#128077;
-                            </div> 
-                         </div>
-                         <div class="right">
-                            <h2>Titre</h2>
-                             <p>Une petite description</p>
-                        </div>
-                     </div>
+                <div id="texte_connecte">
+                   <?php echo $_SESSION['utilisateur']->prenom.' '.$_SESSION['utilisateur']->nom; ?>
+                 </div> 
+
+                 <div id="notif">
+                    <span id="icone_profil"><div id="logo_icone_profil"><img src="img/profil.png"></div></span>
+                    <span id="icone_notification"></span>
+                    <span id="icone_reglages"><div id="logo_icone_reglages"><img src="img/reglage.png"></div></span>
+                    <span id="icone_deconnexion"><div id="logo_icone_deconnexion"><img src="img/deco.png"></div></span>
                 </div>
 
              </div>   
-        	
-        	<div id="contenu">	
+            
+             <div class="fleche_apparition">
+            <div id="bouton_info"></div> 
+             <div id="info_profil">
+
+                <span id="info_texte">Nom : </span> <?php echo $_SESSION['utilisateur']->nom; ?><br>
+                <span id="info_texte">Prénom : </span> <?php echo $_SESSION['utilisateur']->prenom; ?><br>
+                <span id="info_texte">Date de naissance : </span> <?php echo $_SESSION['utilisateur']->dateNaissance; ?><br>
+                <span id="info_texte">email : </span> <?php echo $_SESSION['utilisateur']->email; ?><br>  
+                      
+             </div>
+         </div>
+
+
+            <div id="contenu">  
 
                 <div id="barre_gauche">
                     <div id="cadre_photo"></div>
 
-                    <div id="photo"><img src="img/top.jpg"></div>
-                       
+                    <!--div id="photo"><img src="img/top.jpg"></div-->
+                    <?php getPhotoProfil(); ?>
                     <div class="recherche">
-                        <form method="GET" action="#">
+                        <form method="GET" action="home.php">
                             <input type="text" class="champs_recherche" name="champs_recherche" placeholder="Rechercher ..." />
-                            <input type="submit" class="bouton_recherche" value=""/>
+                            <input type="submit" class="bouton_recherche" value=""/> 
 
                         </form>
                     </div>
 
+                      
+
                     <div class="menu">
                            
-                            <li class="ascenseur">Actualités</li>
-                            <li class="ascenseur">Mes amis</li>
-                            <li class="ascenseur">Mes Messages</li>
+                            <li class="ascenseur">Acceuil</li>
+                            <li class="ascenseur">Amis</li>
+                            <li class="ascenseur">Messages</li>
                             <li class="ascenseur">Groupes</li>
                                 <div>
                                 
@@ -83,37 +93,36 @@
                                 
                                 </div>
                                 
-                            <li class="ascenseur">Messagerie instantanée</li>
+                            <li class="ascenseur">Conversations</li>
 
                     </div>
                     
                 </div>
 
-                <div class="notifications2">
-                    <div class="icone_messages">
-                        &#59160;
-                     </div>  
+             
 
-                    <div class="icone_reglages">
-                        &#9881;
-                    </div>  
-
-                </div>
-
-        	
-                <div id="mur">
-                        <div class="bulle_statut">
+                <div class="bulle_statut">
                             <form class="bulle_mur">
-                            <input class="text_bulle" type="text" name="text_bulle"/><br>
-                            <input class="publier" type="submit" name="publier" value="Publier" />
+                                <textarea class="text_bulle" name="text_bulle" placeholder="Exprimez vous : "></textarea><br>
+                                <input class="publier" type="submit" name="publier" value="Publier" />
                             </form>
                         </div>
 
-                        <div class="mur_publication"></div>
+                <div id="mur">
+                        <div class="mur_de">Mur de : </div>
+                        
+
+                        <div class="mur_publication">
+
+                            <div class="result">
+
+                            </div> 
+                        
+                        </div>
 
                 </div>
 
-        	</div>		
+            </div>      
 
 
 
