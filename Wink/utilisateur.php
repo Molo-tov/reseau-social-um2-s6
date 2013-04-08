@@ -19,6 +19,7 @@
 			else if($attribut=='prenom'){return $this->prenom;}
 			else if($attribut=='dateNaissance'){return $this->dateNaissance;}
 			else if($attribut=='email'){return $this->email;}
+			else if($attribut=='idPhoto'){return $this->idPhoto;}
 			else {return null;}
 		}	
 		public function __construct($pw, $mail)

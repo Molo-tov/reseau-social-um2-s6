@@ -14,7 +14,7 @@
 			include 'home.php';
 		}
 		//Cas d'erreurs, à afficher de meilleurs façon...
-		/*else if($utilisateur->idUtilisateur == -1)
+		else if($utilisateur->idUtilisateur == -1)
 		{
 			echo "Erreur d'email ou de mot de passe";
 		}
@@ -25,7 +25,7 @@
 		else	
 		{
 			echo "Connexion à la base de données impossible";
-		}*/
+		}
 	}
 	else if(isset($_GET['email'])&&isset($_GET['code']))
 	{
@@ -40,14 +40,14 @@
 		$_POST['annee']=1989;
 		include_once 'inscription.php';
 		//inscription() == 0 alors le mail de confirmation est envoyé, sinon voir codes d'erreurs.
-		/*if(inscription()==0)
+		if(inscription()==0)
 		{
 			echo 'Inscription effectuée';
 		}
 		else
 		{
 			echo "Erreur lors de l'inscription, email déjà existant";
-		}*/
+		}
 	} 
 	if(!$connectReussie)
 	{
